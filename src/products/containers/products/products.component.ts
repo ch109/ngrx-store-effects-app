@@ -5,10 +5,12 @@ import {Observable} from 'rxjs/Observable';
 import * as fromStore from '../../store';
 
 import { Pizza } from '../../models/pizza.model';
+import {PizzaState} from "../../store/reducers/pizzas.reducer";
+import {ProductsState} from "../../store/reducers";
 
 /*
   NOTE:
-    We're omitting any Service and using the
+    We're omitting any Service and using
     Store and Observables instead.
  */
 // import { PizzasService } from '../../services/pizzas.service';
@@ -26,11 +28,11 @@ import { Pizza } from '../../models/pizza.model';
         </a>
       </div>
       <div class="products__list">
-        <div *ngIf="!((pizzas)?.length)">
+        <div *ngIf="!((pizzas$ | async)?.length)">
           No pizzas, add one to get started.
         </div>
         <pizza-item
-          *ngFor="let pizza of (pizzas)"
+          *ngFor="let pizza of (pizzas$ | async)"
           [pizza]="pizza">
         </pizza-item>
       </div>
@@ -38,13 +40,12 @@ import { Pizza } from '../../models/pizza.model';
   `,
 })
 export class ProductsComponent implements OnInit {
-  pizzas: Pizza[];
+  pizzas$: Observable<Array<Pizza>>;
 
-  constructor(/*private pizzaService: PizzasService*/) {}
+  constructor(private store: Store<fromStore.ProductsState>) {}
 
   ngOnInit() {
-    // this.pizzaService.getPizzas().subscribe(pizzas => {
-    //   this.pizzas = pizzas;
-    // });
+    this.pizzas$ = this.store
+      .select(fromStore.getAllPizzas); //: Observable<ProductsState<PizzaState<Array<Pizza>>>>
   }
 }
