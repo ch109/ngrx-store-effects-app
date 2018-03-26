@@ -90,7 +90,7 @@
           "name": "mozzarella"
         }
       ],
-      "id": 2
+      "id": 1
     },
     {
       "name": "Plain Ol' Pepperoni",
@@ -98,6 +98,24 @@
         {
           "id": 10,
           "name": "pepperoni"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "Anchovy Speciale",
+      "toppings": [
+        {
+          "id": 1,
+          "name": "anchovy"
+        },
+        {
+          "id": 6,
+          "name": "mushroom"
+        },
+        {
+          "id": 12,
+          "name": "tomato"
         }
       ],
       "id": 3
